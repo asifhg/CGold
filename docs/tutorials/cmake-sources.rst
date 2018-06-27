@@ -6,13 +6,13 @@ CMake listfiles
 
 There are several places where CMake code can live:
 
-* ``CMakeLists.txt`` listfiles loaded by ``add_subdirectory`` command will help
-  you to create source/binary tree. This is a skeleton of your project.
+* In ``CMakeLists.txt`` listfiles loaded by the ``add_subdirectory`` command will help
+  you create a source/binary tree. This is a skeleton of your project.
 
-* ``*.cmake`` modules help you to organize/reuse CMake code.
+* ``*.cmake`` modules help you organize/reuse CMake code.
 
-* CMake scripts can be executed by ``cmake -P`` and help you to solve problems
-  in cross-platform fashion without relying on system specific tools like bash
+* CMake scripts can be executed via``cmake -P`` and help you solve problems
+  in a cross-platform fashion without relying on system specific tools like bash,
   or without introducing external tool dependency like Python.
 
 .. admonition:: Examples on GitHub
