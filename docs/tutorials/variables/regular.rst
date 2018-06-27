@@ -22,13 +22,13 @@ the cache:
   :emphasize-lines: 3,12
 
 You can see that the regular CMake variable ``abc`` is created from scratch
-each time
+for each run.
 
 .. literalinclude:: /examples/usage-of-variables/cache-vs-regular/configure.log
   :language: none
   :emphasize-lines: 4,6,13,15
 
-And the cache variable ``xyz`` is created only once and reused on second run
+And the cache variable ``xyz`` is created only once and reused in the second run:
 
 .. literalinclude:: /examples/usage-of-variables/cache-vs-regular/configure.log
   :language: none
@@ -41,7 +41,7 @@ You can find cache variable ``xyz`` in :ref:`CMakeCache.txt <cmakecache.txt>`:
   [usage-of-variables]> grep xyz _builds/CMakeCache.txt
   xyz:STRING=321
 
-Unlike regular ``abc``:
+Unlike regular variable ``abc``:
 
 .. code-block:: none
 
@@ -66,8 +66,8 @@ introduce their own scopes:
   :language: cmake
   :emphasize-lines: 3
 
-There are two variables ``abc`` defined. One in top level scope and another
-in scope of ``boo`` directory:
+There are two variables ``abc`` defined. One in the top level scope, and the other
+within the scope of the ``boo`` directory:
 
 .. code-block:: none
   :emphasize-lines: 2-5
@@ -141,13 +141,13 @@ like ``set`` and ``unset`` will affect the current scope:
 Parent scope
 ============
 
-A variable can be set to the parent scope by specifying ``PARENT_SCOPE``:
+A variable can be set in the parent scope by specifying ``PARENT_SCOPE``:
 
 .. literalinclude:: /examples/usage-of-variables/parent-scope/CMakeLists.txt
   :language: cmake
   :emphasize-lines: 8
 
-Variable **will only be set to parent** scope:
+Variable **will only be set in parent** scope:
 
 .. literalinclude:: /examples/usage-of-variables/parent-scope/configure.log
   :emphasize-lines: 4,7
@@ -165,7 +165,7 @@ As well as parent of the parent:
 From cache
 ==========
 
-If variable is not found in the current scope, it will be taken from
+If variable is not found in the current scope, it will be used from
 the cache:
 
 .. literalinclude:: /examples/usage-of-variables/from-cache/CMakeLists.txt
@@ -187,7 +187,7 @@ Cache unset regular
 ===================
 
 Note that the order of commands is important because ``set(... CACHE ...)``
-will remove the regular variable with the same name from current scope:
+will remove the regular variable with the same name from the current scope:
 
 .. literalinclude:: /examples/usage-of-variables/cache-remove-regular/CMakeLists.txt
   :language: cmake
@@ -208,7 +208,7 @@ will remove the regular variable with the same name from current scope:
 Confusing
 =========
 
-This may lead to a quite confusing behavior:
+This may lead to quite a confusing behavior:
 
 .. literalinclude:: /examples/usage-of-variables/cache-confuse/CMakeLists.txt
   :language: cmake
@@ -243,8 +243,8 @@ removing cache:
   -- Generating done
   -- Build files have been written to: /.../usage-of-variables/_builds
 
-Since variable ``abc`` already stored in cache command ``set(... CACHE ...)``
-has no effect and **will not remove** regular ``abc`` from scope of function.
+Since variable ``abc`` is already stored in cache, command ``set(... CACHE ...)``
+has no effect and **will not remove** the regular variable ``abc`` from the scope of function.
 
 Names
 =====
@@ -270,7 +270,7 @@ Variable names are case-sensitive:
   -- Generating done
   -- Build files have been written to: /.../usage-of-variables/_builds
 
-Name of variable may consist of **any** characters:
+The name of a variable may consist of **any** characters:
 
 .. literalinclude:: /examples/usage-of-variables/any-names/CMakeLists.txt
   :language: cmake
@@ -318,7 +318,7 @@ quote character will be treated as part of the string:
   -- Generating done
   -- Build files have been written to: /.../usage-of-variables/_builds
 
-As you can see the variable ``b`` contains quotes now and for list ``c`` quotes
+As you can see the variable ``b`` contains quotes now and for list ``c``, quotes
 are part of the elements: ``x"a``, ``c"``.
 
 .. admonition:: CMake documentation
@@ -329,7 +329,7 @@ are part of the elements: ``x"a``, ``c"``.
 Dereferencing
 =============
 
-Dereferenced variable can be used in creation of new variable:
+Dereferenced variable can be used in the creation of new variables:
 
 .. literalinclude:: /examples/usage-of-variables/dereference/CMakeLists.txt
   :language: cmake
@@ -338,7 +338,7 @@ Dereferenced variable can be used in creation of new variable:
 .. literalinclude:: /examples/usage-of-variables/dereference/configure.log
   :emphasize-lines: 3
 
-Or new variable name:
+Or new variable names:
 
 .. literalinclude:: /examples/usage-of-variables/dereference/CMakeLists.txt
   :language: cmake
@@ -347,7 +347,7 @@ Or new variable name:
 .. literalinclude:: /examples/usage-of-variables/dereference/configure.log
   :emphasize-lines: 4
 
-Or even both:
+Or both:
 
 .. literalinclude:: /examples/usage-of-variables/dereference/CMakeLists.txt
   :language: cmake
@@ -359,7 +359,7 @@ Or even both:
 Nested dereferencing
 ====================
 
-Dereferencing of variable by ``${...}`` will happen as many times as needed:
+Dereferencing of variables using ``${...}`` will happen as many times as needed:
 
 .. literalinclude:: /examples/usage-of-variables/nested-dereference/CMakeLists.txt
   :language: cmake
@@ -401,7 +401,7 @@ Dereferencing of variable by ``${...}`` will happen as many times as needed:
 Types of variable
 =================
 
-Variables always have type string but some commands can interpret them
+Variables always have the type string but some commands can interpret them
 differently.  For example the command ``if`` can treat strings as boolean, path, target
 name, etc.:
 
@@ -440,10 +440,10 @@ name, etc.:
 
   * `if <https://cmake.org/cmake/help/latest/command/if.html>`__
 
-Create list
-===========
+Creating lists
+==============
 
-Some commands can treat a variable as list. In this case the string
+Some commands can treat a variable as a list. In this case the string
 value is split into elements separated by ``;``.
 The command ``set`` can create such lists:
 
@@ -451,33 +451,32 @@ The command ``set`` can create such lists:
   :language: cmake
   :emphasize-lines: 4-8
 
-``set`` creates **string** from elements and puts the ``;`` between them:
+``set`` creates a **string** from the elements with a ``;`` in between them:
 
 .. literalinclude:: /examples/usage-of-variables/list/configure.log
   :emphasize-lines: 3
 
-In case you want to add an element with space you can protect the element
+In case you want to add an element with spaces you need to enclose the element
 with ``"``:
 
 .. literalinclude:: /examples/usage-of-variables/list/configure.log
   :emphasize-lines: 5
 
-As seen with ``l4`` variable protecting ``;`` with ``"`` doesn't have any
-effect:
+As seen with the variable ``l4``, enclosing ``;`` with ``"`` has no effect:
 
 .. literalinclude:: /examples/usage-of-variables/list/configure.log
   :emphasize-lines: 7
 
 We are concatenating **string** ``a`` with **string** ``b;c`` and putting
 ``;`` between them. Final result is the **string** ``a;b;c``.  When
-a command interprets this string as list, such list has 3 elements.
+a command interprets this string as a list, such a list has 3 elements.
 Hence **it's not a list** with two elements ``a`` and ``b;c``.
 
-The command ``message`` interprets ``l3`` as list with 3 elements, so in the end
-4 arguments (value of type string) passed as input:
-``print by message:_``, ``a``, ``b``, ``c``. Command ``message`` will concatenate
-them without any separator, hence string ``print by message: abc`` will be
-printed:
+The command ``message`` interprets ``l3`` as a list with 3 elements, so in the end
+4 arguments (value of type string) are passed as input:
+output from ``message:_``, ``a``, ``b``, ``c``. ``message`` will concatenate
+them without any separator, hence string output from ``message`` will be
+``abc``:
 
 .. literalinclude:: /examples/usage-of-variables/list/configure.log
   :emphasize-lines: 8-9
@@ -520,11 +519,11 @@ remove elements by index, etc.:
 List with one empty element
 ===========================
 
-Since list is really just a string **there is no such object** as
-"list with one empty element". Empty string is a list with no elements -
+Since a list is really just a string **there is no such object** as
+"list with one empty element". An empty string is a list with no elements -
 length is 0. String ``;`` is a list with two empty elements - length is 2.
 
-Historically result of appending empty element to an empty list is an empty
+Historically the result of appending an empty element to an empty list is an empty
 list:
 
 .. literalinclude:: /examples/usage-of-variables/empty-list/CMakeLists.txt
@@ -589,11 +588,11 @@ Recommendation
 ==============
 
 Use **short laconic lower-case** names (``a``, ``i``, ``mylist``, ``objects``,
-etc.) for local variables that used **only by the current scope**. Use **long
+etc.) for local variables that are used **only within the current scope**. Use **long
 detailed upper-case** names (``FOO_FEATURE``, ``BOO_ENABLE_SOMETHING``, etc.)
-for variables that used by **several scopes**.
+for variables that used within **several scopes**.
 
-For example it make no sense to use long names in function since function
+For example, it makes no sense to use long names in function, since function
 has it's own scope:
 
 .. code-block:: cmake
@@ -612,7 +611,7 @@ Using just ``a`` will be fine:
     # ...
   endfunction()
 
-Same with scope of :ref:`CMakeLists.txt <cmakelists.txt>`:
+The same applies to the scope of :ref:`CMakeLists.txt <cmakelists.txt>`:
 
 .. code-block:: cmake
 
@@ -642,20 +641,20 @@ Compare it with C++ code:
 
 .. code-block:: cpp
 
-  // pretty bad idea
+  // bad code
   #define a
 
-  // good one
+  // good code
   #define MYPROJECT_ENABLE_A
 
 .. code-block:: cpp
 
-  // does it make sense?
+  // bad code
   for (int array_iterator = 0; array_iterator < array.size(); ++array_iterator) {
     // use 'array_iterator'
   }
 
-  // good one
+  // good code
   for (int i = 0; i < array.size(); ++i) {
     // use 'i'
   }
@@ -663,9 +662,9 @@ Compare it with C++ code:
 Summary
 =======
 
-* All variables have a **string** type
-* List is nothing but **string**, elements of list separated by ``;``
-* The way how variables are interpreted **depends on the command**
-* Do not give same names for **cache** and **regular** variables
-* ``add_subdirectory`` and ``function`` create **new scope**
-* ``include`` and ``macro`` work in the **current scope**
+* All variables have a **string** type.
+* A list is a **string**, elements of a list are separated by ``;``.
+* Variables are interpreted **depending on the command**.
+* Do not use the same names for **cache** and **regular** variables.
+* ``add_subdirectory`` and ``function`` create **new scope**.
+* ``include`` and ``macro`` work in the **current scope**.
