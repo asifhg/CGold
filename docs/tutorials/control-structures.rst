@@ -62,7 +62,7 @@ CMP0054
 Some of the ``if`` commands accept ``<variable|string>`` arguments. This may
 lead to quite surprising behavior.
 
-For example if we have variable ``A`` and it is set to empty string we can
+For example if we have variable ``A`` and it is set to the empty string we can
 check it with:
 
 .. code-block:: cmake
@@ -72,7 +72,7 @@ check it with:
     message("Value of A is empty string")
   endif()
 
-You can save the name of variable in another variable and do the same:
+You can save the name of variable in another variable and do the same check:
 
 .. code-block:: cmake
 
@@ -83,7 +83,7 @@ You can save the name of variable in another variable and do the same:
   endif()
 
 If CMake policy ``CMP0054`` is set to ``OLD`` or not present at all
-(before CMake 3.1), this operation ignore quotes:
+(before CMake 3.1), this operation ignores quotes:
 
 .. code-block:: cmake
 
@@ -93,8 +93,8 @@ If CMake policy ``CMP0054`` is set to ``OLD`` or not present at all
     message("Value of ${B} is empty string")
   endif()
 
-It means operation depends on the context: do variable with name ``${B}``
-present in current scope or not?
+It means that operations depend on the context: is the variable with name ``${B}``
+present in the current scope?
 
 .. literalinclude:: /examples/control-structures/cmp0054-confuse/CMakeLists.txt
   :language: cmake
@@ -137,7 +137,7 @@ Since CMake accepts any names of the variables you can't filter out
 Fix
 ~~~
 
-To avoid such issues you should use CMake 3.1 and ``CMP0054`` policy:
+To avoid such issues you should use CMake 3.1 and the ``CMP0054`` policy:
 
 .. literalinclude:: /examples/control-structures/cmp0054-fix/CMakeLists.txt
   :language: cmake
