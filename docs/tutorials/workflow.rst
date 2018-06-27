@@ -79,12 +79,12 @@ Let's "modify" ``foo.cpp`` source:
   [100%] Linking CXX executable foo
   [100%] Built target foo
 
-Make detects that executable ``foo`` is out-of-date and rebuild it. Well, that's
-what build systems designed for :)
+Make detects that executable ``foo`` is out-of-date and rebuilds it. Well, that's
+what build systems are designed for :)
 
 Now let's "change" CMakeLists.txt. Do we need to run ``cmake -H. -B_builds``
 again? The answer is NO - just keep using ``cmake --build _builds``.
-CMakeLists.txt added as dependent file to the Makefile:
+CMakeLists.txt is added as dependent file to the Makefile:
 
 .. code-block:: none
   :emphasize-lines: 1, 3
@@ -98,7 +98,7 @@ CMakeLists.txt added as dependent file to the Makefile:
   [100%] Built target foo
 
 You see ``Processing CMakeLists.txt``, ``Configuring done`` and
-``Generating done`` indicating that CMake code parsed again and new Makefile
+``Generating done`` indicating that CMakeLists.txt was parsed again and a new Makefile
 generated. Since we don't change the way target ``foo`` is built (like adding
 new build flags or compile definitions) there is no compile/link stages.
 
@@ -151,7 +151,7 @@ Suspicious behavior
 If your workflow doesn't match configure-once approach then it may be a
 symptom of wrongly written CMake code. Especially when you have to run
 ``cmake -H. -B_builds`` twice or when ``cmake --build _builds`` doesn't catch
-updates from CMake code.
+updates to CMakeLists.txt.
 
 .. admonition:: CMake issue
 
