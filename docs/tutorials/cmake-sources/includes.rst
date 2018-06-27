@@ -6,12 +6,12 @@
 Include modules
 ===============
 
-CMake modules is a common way to reuse code.
+CMake includes modules is a common way to reuse code.
 
 Include standard
 ~~~~~~~~~~~~~~~~
 
-CMake comes with set of
+CMake comes with a set of
 `standard modules <https://cmake.org/cmake/help/latest/manual/cmake-modules.7.html>`__:
 
 .. literalinclude:: /examples/cmake-sources/include-processor-count/CMakeLists.txt
@@ -34,7 +34,7 @@ CMake comes with set of
 
 .. warning::
 
-  Do not include ``Find*.cmake`` modules such way. ``Find*.cmake`` modules
+  Do not include ``Find*.cmake`` modules in such a way. ``Find*.cmake`` modules are 
   designed to be used via
   `find_package <https://cmake.org/cmake/help/latest/command/find_package.html>`__.
 
@@ -72,7 +72,7 @@ Recommendation
 ++++++++++++++
 
 To avoid conflicts of your modules with modules from other projects (if they
-are mixed together by ``add_subdirectory``) do "namespace" their names with the
+are mixed together via ``add_subdirectory``), "namespace" their names with the
 project name:
 
 .. code-block:: cmake
@@ -99,14 +99,14 @@ project name:
 Modify correct
 ~~~~~~~~~~~~~~
 
-Note that the correct way to set this path is to **append** it to existing
+Note that the correct way to set this path is to **append** it to the existing
 value:
 
 .. literalinclude:: /examples/cmake-sources/modify-path/CMakeLists.txt
   :language: cmake
   :emphasize-lines: 6, 8, 10
 
-For example when user want to use his own modules instead of standard for
+For example when user want to use his own modules instead of standard modules for
 any reason:
 
 .. literalinclude:: /examples/cmake-sources/modify-path/standard/ProcessorCount.cmake
@@ -129,13 +129,13 @@ Works fine:
 Modify incorrect
 ~~~~~~~~~~~~~~~~
 
-It's not correct to set them ignoring current state:
+It's not correct to set the module paths while ignoring their current state:
 
 .. literalinclude:: /examples/cmake-sources/modify-incorrect/CMakeLists.txt
   :language: cmake
   :emphasize-lines: 6
 
-In this case if user want to use custom modules:
+In this case if the user want to use custom modules:
 
 .. literalinclude:: /examples/cmake-sources/modify-incorrect/standard/ProcessorCount.cmake
   :language: cmake
