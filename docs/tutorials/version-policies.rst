@@ -156,13 +156,13 @@ CMake policies
 
  * `CMake policies <https://cmake.org/cmake/help/latest/manual/cmake-policies.7.html>`__
 
-When new version of CMake released there may be a list of policies describing
-cases when behavior changed comparing to the previous CMake version.
+When a new version of CMake is released, there may be a list of policies describing
+cases when a behavior changed compared to the previous CMake version.
 
-Let's see how it works on practice. In CMake ``3.0`` policy
+Let's see how it works in practice. In CMake ``3.0`` policy
 `CMP0038 <https://cmake.org/cmake/help/latest/policy/CMP0038.html>`__
-was introduced. Before version ``3.0`` user can have target linked to itself,
-which make no sense and definitely **is a bug**:
+was introduced. Before version ``3.0`` a user could have a target linked to itself,
+which makes no sense and definitely **is a bug**:
 
 .. literalinclude:: /examples/policy-examples/bug-2.8/CMakeLists.txt
   :language: cmake
@@ -196,7 +196,7 @@ Works fine for CMake before ``3.0``:
   -- Generating done
   -- Build files have been written to: /.../policy-examples/_builds
 
-For CMake version ``>= 3.0`` warning will be reported:
+For CMake version ``>= 3.0`` a warning will be reported:
 
 .. code-block:: none
   :emphasize-lines: 2,4,7
@@ -218,13 +218,13 @@ For CMake version ``>= 3.0`` warning will be reported:
   -- Generating done
   -- Build files have been written to: /.../policy-examples/_builds
 
-Assume you want to drop the support of old version and more to some new
+Assume you want to drop support of the older version and move to some new
 ``3.0`` features. When you set ``cmake_minimum_required(VERSION 3.0)``
 
 .. literalinclude:: /examples/policy-examples/set-3.0/CMakeLists.txt
   :diff: /examples/policy-examples/bug-2.8/CMakeLists.txt
 
-warning turns into error:
+the warning turns into an error:
 
 .. code-block:: none
   :emphasize-lines: 2,18
@@ -255,19 +255,19 @@ warning turns into error:
   [policy-examples]> echo $?
   1
 
-Two cases will be shown below. In first case we want to keep support of old
-version (``2.8`` for now) so it will work with both ``CMake 2.8`` and
-``CMake 3.0+``. In second case we decide to drop support of old version and move
-to ``CMake 3.0+``. We'll see how it will affect policies. It will be shown in
-the end that in fact without **using new features** from ``CMake 3.0`` it
+Two cases will be shown below. In the first case we want to keep support of the older
+version (``2.8`` for now), so it will work with both ``CMake 2.8`` and
+``CMake 3.0+``. In the second case we decide to drop support of the older version and move
+to ``CMake 3.0+``. We'll see how it affects policies. It will be shown in
+the end that without **using new features** from ``CMake 3.0`` it
 doesn't make sense to change ``cmake_minimum_required``.
 
 Keep using old
 ~~~~~~~~~~~~~~
 
 Our project works fine with ``CMake 2.8`` however ``CMake 3.0+`` emits
-warning. We don't want to fix the error now but want only to suppress warning
-and explain to CMake that it should behaves like ``CMake 2.8``.
+warning. We don't want to fix the error now but want to only suppress the warning
+and tell CMake that it should behave like ``CMake 2.8``.
 
 .. note::
 
@@ -313,7 +313,7 @@ Looks good for ``CMake 3.0+``:
   -- Generating done
 
 Are we done? No, ``CMP0038`` is introduced since ``CMake 3.0`` so ``CMake 2.8``
-have no idea what this policy is about:
+has no idea about this policy:
 
 .. code-block:: none
   :emphasize-lines: 2,4,15
@@ -337,13 +337,13 @@ have no idea what this policy is about:
 
   -- Configuring incomplete, errors occurred!
 
-We should protect new code with ``if(POLICY CMP0038)`` condition:
+We should protect the new code with the ``if(POLICY CMP0038)`` condition:
 
 .. literalinclude:: /examples/policy-examples/suppress-2.8/CMakeLists.txt
   :language: cmake
   :emphasize-lines: 4-9
 
-Of course you should find the time, apply real fix and remove policy logic
+Of course you should find the time, apply the real fix and remove the policy logic
 since it will not be needed anymore:
 
 .. literalinclude:: /examples/policy-examples/fix-2.8/CMakeLists.txt
@@ -368,10 +368,10 @@ To suppress error without doing real fix (temporary solution) you can add
 .. note::
 
   We don't need to protect ``cmake_policy`` with ``if(POLICY)``
-  condition since ``cmake_minimum_required(VERSION 3.0)`` guarantee us that
+  condition since ``cmake_minimum_required(VERSION 3.0)`` guarantees us that
   we are using ``CMake 3.0+``.
 
-Policy can be removed after real fix applied:
+The policy can be removed after the real fix is applied:
 
 .. literalinclude:: /examples/policy-examples/fix-3.0/CMakeLists.txt
   :diff: /examples/policy-examples/suppress-3.0/CMakeLists.txt
@@ -381,13 +381,13 @@ Final version:
 .. literalinclude:: /examples/policy-examples/fix-3.0/CMakeLists.txt
   :language: cmake
 
-You may notice that final version for both cases differs only in ``cmake_minimum_required``:
+You may notice that the final version for both cases differs only in ``cmake_minimum_required``:
 
 .. literalinclude:: /examples/policy-examples/fix-3.0/CMakeLists.txt
   :diff: /examples/policy-examples/fix-2.8/CMakeLists.txt
 
-It means that there is no much sense in changing ``cmake_minimum_required``
-without using any **new features**.
+This means that there is not much sense in changing ``cmake_minimum_required``
+when we are not using any **new features**.
 
 Summary
 =======
