@@ -7,7 +7,7 @@ Environment variables
 Read
 ====
 
-Environment variable can be read by using ``$ENV{...}`` syntax:
+Environment variable can be read using ``$ENV{...}``:
 
 .. literalinclude:: /examples/usage-of-variables/read-env/CMakeLists.txt
   :language: cmake
@@ -29,7 +29,7 @@ Environment variable can be read by using ``$ENV{...}`` syntax:
 Set
 ===
 
-By using ``set(ENV{...})`` syntax CMake can set environment variable:
+By using ``set(ENV{...})``, CMake can set environment variables:
 
 .. literalinclude:: /examples/usage-of-variables/set-env/CMakeLists.txt
   :language: cmake
@@ -51,7 +51,7 @@ By using ``set(ENV{...})`` syntax CMake can set environment variable:
 Unset
 =====
 
-Unset environment variable:
+Unset environment variables:
 
 .. literalinclude:: /examples/usage-of-variables/unset-env/CMakeLists.txt
   :language: cmake
@@ -107,7 +107,7 @@ Child process will inherit environment variables of parent:
 Configure step
 ==============
 
-Note that in previous examples variable was set on
+Note that in previous examples variables were set in the
 :ref:`configure step <configure>`:
 
 .. literalinclude:: /examples/usage-of-variables/env-configure/CMakeLists.txt
@@ -124,7 +124,7 @@ Note that in previous examples variable was set on
   -- Generating done
   -- Build files have been written to: /.../usage-of-variables/_builds
 
-But environment variable remains the same on :ref:`build step <build>`:
+But environment variables are unchanged in the :ref:`build step <build>`:
 
 .. literalinclude:: /examples/usage-of-variables/env-configure/CMakeLists.txt
   :language: cmake
@@ -145,9 +145,9 @@ But environment variable remains the same on :ref:`build step <build>`:
 No tracking
 ===========
 
-CMake doesn't track changes of used environment variables so if your CMake code
-depends on environment variable and you're planning to change it from time to
-time it will break normal :ref:`workflow <workflow>`:
+CMake doesn't track changes of environment variables, so if your CMake code
+depends on environment variables, and you're planning to change them from time to
+time, it will break the normal :ref:`workflow <workflow>`:
 
 .. literalinclude:: /examples/usage-of-variables/env-depends/CMakeLists.txt
   :language: cmake
