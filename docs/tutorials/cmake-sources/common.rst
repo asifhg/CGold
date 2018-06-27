@@ -6,10 +6,10 @@ Common variables
 
 Since every ``CMakeLists.txt`` is a :ref:`listfile <listfile>` hence the common
 listfile variables like ``CMAKE_CURRENT_LIST_DIR`` or
-``CMAKE_CURRENT_LIST_FILE`` available. For ``CMakeLists.txt`` added by
+``CMAKE_CURRENT_LIST_FILE`` are available. For ``CMakeLists.txt`` added by
 ``add_subdirectory`` there will be no difference between
 ``CMAKE_CURRENT_LIST_DIR`` and ``CMAKE_CURRENT_SOURCE_DIR``, also
-``CMAKE_CURRENT_LIST_FILE`` will be always full path to ``CMakeLists.txt``.
+``CMAKE_CURRENT_LIST_FILE`` will always be the full path to ``CMakeLists.txt``.
 However it's not always true for other types of CMake listfiles.
 
 .. admonition:: CMake documentation
@@ -46,9 +46,9 @@ Information about any kind of listfile can be taken from
 CMAKE_CURRENT_LIST_DIR vs CMAKE_CURRENT_SOURCE_DIR
 --------------------------------------------------
 
-The difference between those two variables is about type of information they
-provide. ``CMAKE_CURRENT_SOURCE_DIR`` variable describe **source tree** and
-should be read as *current source tree directory*.
+The difference between these two variables is the type of information they
+provide. ``CMAKE_CURRENT_SOURCE_DIR`` describes the **source tree** and
+should be read as the *current source tree directory*.
 Here is a list of sibling variables describing source/binary trees:
 
 * CMAKE_SOURCE_DIR
@@ -65,7 +65,7 @@ The next files **always** exist:
 * ``${PROJECT_SOURCE_DIR}/CMakeLists.txt``
 * ``${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt``
 
-``CMAKE_CURRENT_LIST_DIR`` variable describe **current listfile** (it is not
+``CMAKE_CURRENT_LIST_DIR`` describes **current listfile** (it is not
 necessary ``CMakeLists.txt``, it can be ``somemodule.cmake``), should
 be read as *directory of currently processed listfile*, i.e.
 directory of ``CMAKE_CURRENT_LIST_FILE``. Here is another list of sibling
@@ -79,20 +79,20 @@ variables:
 Example
 -------
 
-Assume we have external CMake module that calculates SHA1 of CMakeLists.txt
-and save it with some custom info to ``sha1`` file in current binary directory:
+Assume we have an external CMake module that calculates the SHA1 of CMakeLists.txt
+and saves it with some custom info, to a ``sha1`` file in the current binary directory:
 
 .. literalinclude:: /examples/cmake-sources/with-external-module/external/mymodule.cmake
   :language: cmake
 
-``mymodule.cmake`` use some resource. Resource ``info/message.txt``
+``mymodule.cmake`` uses some resource. Resource ``info/message.txt``
 is a file with content:
 
 .. literalinclude:: /examples/cmake-sources/with-external-module/external/info/message.txt
   :language: none
 
-To read this resource we must use ``CMAKE_CURRENT_LIST_DIR`` because file
-located **in same external directory** as module:
+To read this resource we must use ``CMAKE_CURRENT_LIST_DIR`` because the file is 
+located **in the same external directory** as module:
 
 .. literalinclude:: /examples/cmake-sources/with-external-module/external/mymodule.cmake
   :language: cmake
@@ -150,15 +150,15 @@ This diagram will make everything clear:
 Recommendation
 --------------
 
-Instead of keeping in head all this information you can remember just two
+Instead of trying to remember all this information, you can remember just two
 variables:
 
 * ``CMAKE_CURRENT_LIST_DIR``
 * ``CMAKE_CURRENT_BINARY_DIR``
 
-Note that *in function* ``CMAKE_CURRENT_LIST_DIR`` variable is set to the
-directory where function **used**, not where
-function **defined** (see :ref:`function <function list dir>` for details).
+Note that *in function*, the ``CMAKE_CURRENT_LIST_DIR`` variable is set to the
+directory where function is **used**, not where
+function is **defined** (see :ref:`function <function list dir>` for details).
 
 Use ``CMAKE_CURRENT_BINARY_DIR`` for storing generated files.
 
@@ -184,20 +184,20 @@ Make sure you **fully understand** what each variable means in other scenarios:
   ``<top-level>/my-resource.txt`` instead of ``<my-project>/my-resource.txt``
 
 * ``PROJECT_SOURCE_DIR``/``PROJECT_BINARY_DIR`` these variables are better
-  then previous but still have kind of a global nature. You should change all
-  paths related to ``PROJECT_SOURCE_DIR`` if you decide to move declaration of
+  than previous ones but still have kind of a global nature. You should change all
+  paths related to ``PROJECT_SOURCE_DIR`` if you decide to move the declaration of
   your project or decide to detach some part of the code and add new
-  ``project`` command in the middle of the source tree. Consider using extra
-  variable with clean separate purpose for such job
-  ``set(FOO_MY_RESOURCES "${CMAKE_CURRENT_LIST_DIR}/resources")`` instead of
+  ``project`` commands in the middle of the source tree. Consider using extra
+  variables with a clean separate purpose for such jobs, example: 
+  ``set(FOO_MY_RESOURCES "${CMAKE_CURRENT_LIST_DIR}/resources")``, instead of
   referring to ``${PROJECT_SOURCE_DIR}/resources``.
 
-* ``CMAKE_CURRENT_SOURCE_DIR`` this is a directory with ``CMakeLists.txt``.
+* ``CMAKE_CURRENT_SOURCE_DIR`` this is a directory containing ``CMakeLists.txt``.
   If you're using this variable internally you can substitute is with
-  ``CMAKE_CURRENT_LIST_DIR``. In case you're creating module for external usage
+  ``CMAKE_CURRENT_LIST_DIR``. In case you're creating a module for external usage
   consider moving all functionality to ``function``.
 
-With this recommendation previous example can be rewritten in next way:
+With this recommendation previous examples can be rewritten in the following way:
 
 .. literalinclude:: /examples/cmake-sources/with-external-module-good/external/mymodule.cmake
   :language: cmake
