@@ -10,10 +10,10 @@ Variables
   | *the ones nobody uses.*
   | -- `Bjarne Stroustrup <https://en.wikiquote.org/wiki/Bjarne_Stroustrup>`__
 
-We have touched already some simple syntax like dereferencing variable ``A`` by
-``${A}`` in ``message`` command: ``message("This is A: ${A}")``. Cache variables
-was mentioned in :doc:`CMake stages </tutorials/cmake-stages>`. Here is an
-overview of different types of variables with examples.
+We have already touched upon some simple syntax like dereferencing variable ``A`` with 
+``${A}`` in the ``message`` command: ``message("This is A: ${A}")``. Cache variables
+were mentioned in :doc:`CMake stages </tutorials/cmake-stages>`. Here is an
+overview of the different types of variables with examples.
 
 .. admonition:: CMake documentation
 
