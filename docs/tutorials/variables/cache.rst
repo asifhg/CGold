@@ -4,7 +4,7 @@
 Cache variables
 ---------------
 
-Cache variables saved in :ref:`CMakeCache.txt` file:
+Cache variables are saved in :ref:`CMakeCache.txt` file:
 
 .. literalinclude:: /examples/usage-of-variables/cache-cmakecachetxt/CMakeLists.txt
   :language: cmake
@@ -24,8 +24,7 @@ Cache variables saved in :ref:`CMakeCache.txt` file:
 No scope
 ========
 
-Unlike regular variables CMake cache variables have no scope and
-are set globally:
+Unlike regular variables CMake cache variables have global scope:
 
 .. literalinclude:: /examples/usage-of-variables/cache-no-scope/CMakeLists.txt
   :language: cmake
@@ -48,8 +47,8 @@ are set globally:
 Double set
 ==========
 
-If variable is already in cache then command ``set(... CACHE ...)`` will have no
-effect - old variable will be used still:
+If a variable is already in cache then the command ``set(... CACHE ...)`` will have no
+effect - old variable values will be used:
 
 .. literalinclude:: /examples/usage-of-variables/double-set/1/CMakeLists.txt
   :language: cmake
@@ -88,8 +87,8 @@ Update :ref:`CMakeLists.txt <cmakelists.txt>` (don't remove cache!):
 -D
 ==
 
-Cache variable can be set by ``-D`` command line option.  Variable that set by
-``-D`` option take priority over ``set(... CACHE ...)`` command.
+Cache variables can be set using the ``-D`` command line option.  Variable that are set via 
+``-D`` take priority over the ``set(... CACHE ...)`` command.
 
 .. code-block:: none
   :emphasize-lines: 1-2, 7
@@ -106,8 +105,8 @@ Initial cache
 =============
 
 If there are a lot of variables to set it's not so convenient to use ``-D``.
-In this case user can define all variables in separate file and load
-it by ``-C``:
+In this case the user can define all variables in a separate file and load
+it via ``-C``:
 
 .. literalinclude:: /examples/usage-of-variables/initial-cache/cache.cmake
   :language: cmake
@@ -133,8 +132,8 @@ it by ``-C``:
 Force
 =====
 
-If you want to set cache variable even if it's already present in cache file
-you can add ``FORCE``:
+If you want to set a cache variable even if it's already present in the cache file,
+you can use the keyword ``FORCE``:
 
 .. literalinclude:: /examples/usage-of-variables/force/CMakeLists.txt
   :language: cmake
@@ -150,17 +149,17 @@ you can add ``FORCE``:
   -- Generating done
   -- Build files have been written to: /.../usage-of-variables/_builds
 
-This is quite surprising behavior for user and conflicts with the nature of
-cache variables that was designed to store variable once and globally.
+This is quite a surprising behavior for users and conflicts with the nature of
+cache variables that were designed to store variable values once and globally.
 
 .. warning::
 
-  ``FORCE`` usually is an indicator of badly designed CMake code.
+  ``FORCE`` usually it is an indicator of badly designed CMake code.
 
 Force as a workaround
 =====================
 
-``FORCE`` can be used to fix the problem that described
+``FORCE`` can be used to fix the problem that was described
 :ref:`eariler <cache confusing>`:
 
 .. literalinclude:: /examples/usage-of-variables/no-force-confuse/CMakeLists.txt
@@ -182,8 +181,8 @@ Force as a workaround
   -- Generating done
   -- Build files have been written to: /.../usage-of-variables/_builds
 
-With ``FORCE`` variable will be set even it's already present in cache, so
-regular variable with the same name will be unset too each time:
+With ``FORCE``, the variable will be set even if it's already present in cache, so
+a regular variable with the same name will be unset at each run:
 
 .. literalinclude:: /examples/usage-of-variables/force-workaround/CMakeLists.txt
   :language: cmake
@@ -207,7 +206,7 @@ regular variable with the same name will be unset too each time:
 Cache type
 ==========
 
-Though type of any variable is **always** string you can add some hints which
+Although the type of any variable is **always** string, you can add some hints which
 will be used by CMake-GUI:
 
 .. literalinclude:: /examples/usage-of-variables/cache-type/CMakeLists.txt
@@ -219,12 +218,12 @@ Run configure:
 .. image:: cache-gui/01-generate.png
   :align: center
 
-Variable ``FOO_A`` will be treated as boolean. Uncheck box and run configure:
+Variable ``FOO_A`` will be treated as a boolean. Uncheck box and run configure:
 
 .. image:: cache-gui/02-bool.png
   :align: center
 
-Variable ``FOO_B`` will be treated as path to the file. Click on ``...``:
+Variable ``FOO_B`` will be treated as a path to the file. Click on ``...``:
 
 .. image:: cache-gui/03-filepath.png
   :align: center
@@ -239,7 +238,7 @@ Run configure:
 .. image:: cache-gui/05-ok-filepath.png
   :align: center
 
-Variable ``FOO_C`` will be treated as path to directory. Click on ``...``:
+Variable ``FOO_C`` will be treated as a path to the directory. Click on ``...``:
 
 .. image:: cache-gui/06-path.png
   :align: center
@@ -283,7 +282,7 @@ Will pop-up as a hint for users:
 Enumerate
 =========
 
-Selection widget can be created for variable of string type:
+The selection widget can be created for variables of string type:
 
 .. literalinclude:: /examples/usage-of-variables/cache-enum/CMakeLists.txt
   :language: cmake
@@ -309,17 +308,17 @@ is a string still):
 .. image:: cache-gui/13-gui-internal.png
   :align: center
 
-Also such type of variable implies ``FORCE``:
+Also such type of a variable implies ``FORCE``:
 
 .. literalinclude:: /examples/usage-of-variables/internal-force/CMakeLists.txt
   :language: cmake
   :emphasize-lines: 4-6, 8-10
 
-Variable ``FOO_A`` will be set to ``123`` then **rewritten** to ``456`` because
+Variable ``FOO_A`` will be set to ``123`` then **reset** to ``456`` because the 
 behavior is similar to variable **with FORCE**, then one more time to ``789``,
-so final result is ``789``. Variable ``FOO_B`` is a cache variable with **no
-FORCE** so first ``123`` will be set to cache, then since ``FOO_B`` is already
-in cache ``456`` and ``789`` **will be ignored**, so final result is ``123``:
+so the final result is ``789``. Variable ``FOO_B`` is a cache variable with **no
+FORCE** so first ``123`` will be saved in cache, then since ``FOO_B`` is already
+in cache, ``456`` and ``789`` **will be ignored**, so the final result is ``123``:
 
 .. code-block:: none
   :emphasize-lines: 2-4
@@ -335,7 +334,7 @@ in cache ``456`` and ``789`` **will be ignored**, so final result is ``123``:
 Advanced
 ========
 
-If variable is marked as advanced:
+If a variable is marked as advanced:
 
 .. literalinclude:: /examples/usage-of-variables/advanced-gui/CMakeLists.txt
   :language: cmake
@@ -440,8 +439,8 @@ current scope and have no effect on cache:
   :language: cmake
   :emphasize-lines: 4-5, 8, 11
 
-When we have both cache and regular ``X`` variables regular variable has
-higher priority and will be printed:
+When we have both cache and regular ``X``, the regular ``x`` has higher 
+priority and will be printed:
 
 .. literalinclude:: /examples/usage-of-variables/unset-cache/configure.log
   :emphasize-lines: 3
@@ -458,7 +457,7 @@ left:
 .. literalinclude:: /examples/usage-of-variables/unset-cache/configure.log
   :emphasize-lines: 5
 
-Since ``option`` do modify cache same logic applied here:
+Since ``option`` modifies cache, the same logic applies here:
 
 .. literalinclude:: /examples/usage-of-variables/unset-cache/CMakeLists.txt
   :language: cmake
@@ -473,7 +472,7 @@ Recommendation
 ==============
 
 Because of the global nature of cache variables and options
-(well it's cache too) you should do prefix it with the name of the project to
+(well it's cache too) you should prefix it with the name of the project to
 avoid clashing in case several projects are mixed together by
 ``add_subdirectory``:
 
@@ -494,8 +493,8 @@ avoid clashing in case several projects are mixed together by
   * :ref:`Module names <module name recommendation>`
   * :ref:`Function names <function name recommendation>`
 
-Besides the fact that both features can be set independently now also CMake-GUI
-will group them nicely:
+Besides the fact that both features can be set independently, now CMake-GUI also
+groups them nicely:
 
 .. image:: cache-gui/grouped.png
   :align: center
