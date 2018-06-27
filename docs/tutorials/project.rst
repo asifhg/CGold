@@ -4,9 +4,9 @@
 Project declaration
 -------------------
 
-Next must-have command is
+The next must-have command is
 `project <https://cmake.org/cmake/help/latest/command/project.html>`__.
-Command ``project(foo)`` will set languages to C and C++ (default),
+The command ``project(foo)`` will set languages to C and C++ (default),
 declare some ``foo_*`` variables and run basic build tool checks.
 
 .. admonition:: CMake documentation
@@ -18,7 +18,7 @@ Tools discovering
 
 .. _project tools discovering:
 
-By default on calling ``project`` command CMake will try to detect compilers
+By default on calling the ``project`` command, CMake will try to detect compilers
 for default languages: C and C++. Let's add some variables and check where
 they are defined:
 
@@ -62,11 +62,11 @@ Run test on ``Linux``:
   -- Generating done
   -- Build files have been written to: /.../project-examples/_builds
 
-CMake will run tests for other tools as well, so try to avoid
-checking of anything before ``project``, place all checks
+CMake will run tests for other tools as well, so we should try to avoid
+checking for anything before ``project``. Place all checks
 **after project declared**.
 
-Also ``project`` is a place where toolchain file will be read.
+Also ``project`` is a place where the toolchain file will be read.
 
 .. literalinclude:: /examples/project-examples/toolchain/CMakeLists.txt
   :language: cmake
@@ -113,21 +113,21 @@ Also ``project`` is a place where toolchain file will be read.
 
 .. note::
 
-  You may notice that toolchain read several times
+  You may notice that the toolchain is read several times.
 
 Languages
 =========
 
 If you don't have or don't need support for one of the default languages you can
-set language explicitly after name of the project. This is how to setup
+set language explicitly after the name of the project. This is how we setup a 
 C-only project:
 
 .. literalinclude:: /examples/project-examples/c-compiler/CMakeLists.txt
   :language: cmake
   :emphasize-lines: 7
 
-There is no checks for C++ compiler and variable with path to C++ compiler
-is empty now:
+There are no checks for the C++ compiler and the variable with the path to the C++ compiler
+is empty for now:
 
 .. code-block:: none
   :emphasize-lines: 2, 8, 15
@@ -152,8 +152,8 @@ is empty now:
   -- Build files have been written to: /.../project-examples/_builds
 
 Of course you will not be able to build C++ targets anymore. Since CMake
-thinks that ``*.cpp`` extension is for C++ sources (by default) there will
-be error reported if C++ is not listed (discovering of C++
+thinks that ``*.cpp`` extension is for C++ sources (by default), there will
+be an error reported if C++ is not listed (discovering of C++
 tools will not be triggered):
 
 .. literalinclude:: /examples/project-examples/cpp-not-found/CMakeLists.txt
@@ -197,12 +197,12 @@ No checks for C or C++ compiler as you can see:
 
 .. note::
 
-  Such form will be used widely in examples in cases when we don't need to
+  This form will be used widely in examples in cases when we don't need to
   build targets.
 
 .. note::
 
-  For CMake 3.0+ sub-option ``LANGUAGES`` added, since it will be:
+  For CMake 3.0+, the sub-option ``LANGUAGES`` is added, since it will be:
 
   .. code-block:: cmake
 
@@ -214,8 +214,8 @@ No checks for C or C++ compiler as you can see:
 Variables
 =========
 
-Command ``project`` declare ``*_{SOURCE,BINARY}_DIR`` variables. Since version
-``3.0`` you can add ``VERSION`` which additionally declare
+Command ``project`` declares the ``*_{SOURCE,BINARY}_DIR`` variables. From version
+``3.0`` onwards you can add ``VERSION`` which additionally declares the 
 ``*_VERSION_{MAJOR,MINOR,PATCH,TWEAK}`` variables:
 
 .. literalinclude:: /examples/project-examples/variables/CMakeLists.txt
@@ -257,7 +257,7 @@ Command ``project`` declare ``*_{SOURCE,BINARY}_DIR`` variables. Since version
 
 You can use alternative ``foo_{SOURCE,BINARY}_DIRS``/
 ``foo_VERSION_{MINOR,MAJOR,PATCH}`` synonyms. This is useful
-when you have hierarchy of projects:
+when you have a hierarchy of projects:
 
 .. literalinclude:: /examples/project-examples/hierarchy/CMakeLists.txt
   :language: cmake
@@ -297,16 +297,16 @@ when you have hierarchy of projects:
   -- Generating done
   -- Build files have been written to: /.../project-examples/_builds
 
-As you can see we are still able to use ``foo_*`` variables even if new
-command ``project(boo)`` called.
+As you can see, we are still able to use ``foo_*`` variables even if the new
+command ``project(boo)`` is called.
 
 When not declared
 =================
 
 CMake will implicitly declare ``project`` in case there is no such command
-in top-level CMakeLists.txt. This will be equal to calling ``project``
+in the top-level CMakeLists.txt. This will be equal to calling ``project``
 before any other commands. It means that ``project`` will be called **before**
-``cmake_minimum_required`` so can lead to problems described in
+``cmake_minimum_required``, so it could lead to problems as described in the 
 :ref:`previous section <cmake_minimum_required should be first>`:
 
 .. literalinclude:: /examples/project-examples/not-declared/CMakeLists.txt
