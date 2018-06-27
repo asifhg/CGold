@@ -7,8 +7,8 @@ Subdirectories
 Tree
 ----
 
-:ref:`CMakeLists.txt <cmakelists.txt>` loaded by ``add_subdirectory`` command
-creates node in a source tree:
+The ``add_subdirectory`` command loaded by :ref:`CMakeLists.txt <cmakelists.txt>`  
+creates a node in the source tree:
 
 .. literalinclude:: /examples/cmake-sources/simple-tree/CMakeLists.txt
   :language: cmake
@@ -50,8 +50,8 @@ creates node in a source tree:
 Source variables
 ----------------
 
-``CMAKE_CURRENT_SOURCE_DIR`` variable will hold full path to currently
-processed node. Root of the tree is always available in
+The ``CMAKE_CURRENT_SOURCE_DIR`` variable holds the full path to the node currently 
+being processed. The root of the tree is always available in
 ``CMAKE_SOURCE_DIR`` (see :ref:`-H <-H>`):
 
 .. literalinclude:: /examples/cmake-sources/simple-tree-source-vars/CMakeLists.txt
@@ -106,8 +106,8 @@ processed node. Root of the tree is always available in
 Binary tree
 -----------
 
-Same structure will be replicated in :ref:`binary tree <binary tree>`.
-Information can be taken from ``CMAKE_BINARY_DIR`` (see :ref:`-B <-B>`) and
+The same structure will be replicated in a :ref:`binary tree <binary tree>`.
+Information can be taken from the ``CMAKE_BINARY_DIR`` (see :ref:`-B <-B>`) and
 ``CMAKE_CURRENT_BINARY_DIR`` variables:
 
 .. literalinclude:: /examples/cmake-sources/simple-tree-binary-vars/CMakeLists.txt
